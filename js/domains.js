@@ -1,9 +1,9 @@
 (function() {
 
-  domains = {
-    twitter: '',
-    facebook: '',
-    instagram: ''
-  };
+	domains = {
+		twitter: '',
+		facebook: '',
+		instagram: ''
+	};
 
 })();
