@@ -14,9 +14,9 @@
 	};
 
 	var
-	APIHandler = function(domain) {
+	APIHandler = function(url) {
 
-		this.domain = domain;
+		this.url = url;
 		this.apis = {};
 
 	};
@@ -25,16 +25,17 @@
 		var
 		xhr = new XMLHttpRequest(),
 		api = this.apis[apiName],
-		url = api.url,
+		path = api.path,
 		contentType = contentTypes.json,
 		callback = 'error',
-		key;
+		key,
+		url = this.url;
 
 		if(options.params) {
-			for(key in options.params) {
-				xhr.setRequestHeader(key, options.params[key]);
-			};
+			path = ROCK.STRING.replacer(path, options.params);
 		};
+
+		url += path;
 
 		xhr.open(api.method, url, !sync);
 
@@ -62,7 +63,7 @@
 				if(xhr.status===200||xhr.status===201) {
 					callback = 'success';
 				};
-				options[callback](conentType.parseIn(response), xhr);
+				options[callback](contentType.parseIn(xhr.response), xhr);
 			};
 		};
 
@@ -72,10 +73,11 @@
 	APIHandler.prototype.addEndpoint = function(name, method, path) {
 
 		this.apis[name] = {
-			name: name,
 			method: method,
 			path: path
 		};
+
+		return this;
 
 	};
 
