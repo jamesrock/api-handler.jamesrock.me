@@ -11,15 +11,14 @@
 				return JSON.stringify(input);
 			}
 		}
-	};
-
-	var
+	},
 	APIHandler = function(url) {
 
 		this.url = url;
 		this.apis = {};
 
 	};
+
 	APIHandler.prototype.call = function(apiName, options, sync) {
 
 		var
