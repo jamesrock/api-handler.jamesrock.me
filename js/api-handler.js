@@ -15,15 +15,15 @@
 	APIHandler = function(url) {
 
 		this.url = url;
-		this.apis = {};
+		this.endpoints = {};
 
 	};
 
-	APIHandler.prototype.call = function(apiName, options, sync) {
+	APIHandler.prototype.call = function(endpoint, options, sync) {
 
 		var
 		xhr = new XMLHttpRequest(),
-		api = this.apis[apiName],
+		api = this.endpoints[endpoint],
 		path = api.path,
 		contentType = contentTypes.json,
 		callback = 'error',
@@ -71,7 +71,7 @@
 	};
 	APIHandler.prototype.addEndpoint = function(name, method, path) {
 
-		this.apis[name] = {
+		this.endpoints[name] = {
 			method: method,
 			path: path
 		};
