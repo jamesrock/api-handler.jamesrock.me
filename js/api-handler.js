@@ -16,6 +16,8 @@
 
 		this.url = url;
 		this.endpoints = {};
+		this.headers = {};
+		this.params = {};
 
 	};
 
@@ -29,6 +31,8 @@
 		callback = 'error',
 		key,
 		url = this.url;
+
+		path = ROCK.STRING.replacer(path, this.params);
 
 		if(options.params) {
 			path = ROCK.STRING.replacer(path, options.params);
@@ -75,6 +79,20 @@
 			method: method,
 			path: path
 		};
+
+		return this;
+
+	};
+	APIHandler.prototype.addHeader = function(name, value) {
+
+		this.headers[name] = value;
+
+		return this;
+
+	};
+	APIHandler.prototype.addParam = function(name, value) {
+
+		this.params[name] = value;
 
 		return this;
 
